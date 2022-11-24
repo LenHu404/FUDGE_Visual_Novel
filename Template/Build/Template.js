@@ -45,7 +45,8 @@ var Template;
         // themes
         dystopia: "../Audio/Dystopian.ogg",
         //background
-        supermarketTrolleys: "Supermarket_with_Trolleys.mp3",
+        supermarketTrolleys: "../Audio/Supermarket_with_Trolleys.mp3",
+        smallCrowd: "../Audio/smallCrowd.mp3",
         // SFX
         payingSound: "../Audio/payingSound.mp3"
     };
@@ -186,9 +187,12 @@ var Template;
         gameMenu = Template.ƒS.Menu.create(inGameMenuButtons, buttonFunctionalities, "gameMenuCSSClass");
         buttonFunctionalities("Close");
         let scenes = [
-            { scene: Template.TestScene, name: "Test Scene" },
-            { scene: Template.TestScene02, name: "Test Scene 02" }
+            { scene: Template.SupermarketScene, name: "SupermarketScene" }
         ];
+        /* let scenes: ƒS.Scenes = [
+          { scene: TestScene, name: "Test Scene" },
+          { scene: TestScene02, name: "Test Scene 02" }
+        ]; */
         let uiElement = document.querySelector("[type=interface]");
         Template.dataForSave = Template.ƒS.Progress.setData(Template.dataForSave, uiElement);
         // start the sequence
@@ -215,7 +219,7 @@ var Template;
 })(Template || (Template = {}));
 var Template;
 (function (Template) {
-    async function TestScene02() {
+    async function SupermarketScene() {
         console.log("First Test Scene");
         let dialogue = {
             iSayYes: "Okay",
@@ -223,7 +227,10 @@ var Template;
             iSayNothing: "......."
         };
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.nightCity);
+        Template.ƒS.Sound.fade(Template.sound.supermarketTrolleys, 0.2, 1, true);
+        Template.ƒS.Sound.play(Template.sound.payingSound, 0.2, true);
+        Template.ƒS.Sound.fade(Template.sound.smallCrowd, 0.2, 1, true);
+        await Template.ƒS.Location.show(Template.locations.supermarketInside);
         await Template.ƒS.update(Template.transitions.wet.duration, Template.transitions.wet.alpha, Template.transitions.wet.edge);
         await Template.ƒS.Character.show(Template.characters.Eduard, Template.characters.Eduard.pose.normal, Template.ƒS.positionPercent(20, 100));
         await Template.ƒS.Character.show(Template.characters.Aisaka, Template.characters.Aisaka.pose.happy, Template.ƒS.positionPercent(70, 110));
@@ -260,12 +267,13 @@ var Template;
                 //await ƒS.Character.hide(characters.Eduard);
                 await Template.ƒS.update(0.5);
                 await Template.ƒS.Speech.tell(Template.characters.Aisaka, "Alright i'll be right back with something sweet for you!");
-                await Template.ƒS.Character.animate(Template.characters.Aisaka, Template.characters.Aisaka.pose.angry, Template.ghostAnimation());
+                await Template.ƒS.Character.hide(Template.characters.Aisaka);
+                await Template.ƒS.Character.animate(Template.characters.Aisaka, Template.characters.Aisaka.pose.happy, Template.ghostAnimation());
                 break;
         }
         Template.ƒS.Speech.hide();
     }
-    Template.TestScene02 = TestScene02;
+    Template.SupermarketScene = SupermarketScene;
 })(Template || (Template = {}));
 var Template;
 (function (Template) {

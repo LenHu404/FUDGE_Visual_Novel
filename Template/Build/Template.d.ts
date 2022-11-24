@@ -41,6 +41,7 @@ declare namespace Template {
     let sound: {
         dystopia: string;
         supermarketTrolleys: string;
+        smallCrowd: string;
         payingSound: string;
     };
     let locations: {
@@ -108,11 +109,13 @@ declare namespace Template {
     };
 }
 declare namespace Template {
+    function SupermarketScene(): ƒS.SceneReturn;
 }
 declare namespace Template {
     function TestScene(): ƒS.SceneReturn;
 }
 declare namespace Template {
+    function TestScene02(): ƒS.SceneReturn;
 }
 declare namespace Template {
     function TestScene03(): ƒS.SceneReturn;

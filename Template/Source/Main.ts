@@ -49,7 +49,8 @@ namespace Template {
     dystopia: "../Audio/Dystopian.ogg",
 
     //background
-    supermarketTrolleys: "Supermarket_with_Trolleys.mp3",
+    supermarketTrolleys: "../Audio/Supermarket_with_Trolleys.mp3",
+    smallCrowd: "../Audio/smallCrowd.mp3",
 
     // SFX
     payingSound: "../Audio/payingSound.mp3"
@@ -203,9 +204,13 @@ namespace Template {
     gameMenu = ƒS.Menu.create(inGameMenuButtons, buttonFunctionalities, "gameMenuCSSClass");
     buttonFunctionalities("Close");
     let scenes: ƒS.Scenes = [
+      { scene: SupermarketScene, name: "SupermarketScene" }
+      
+    ];
+    /* let scenes: ƒS.Scenes = [
       { scene: TestScene, name: "Test Scene" },
       { scene: TestScene02, name: "Test Scene 02" }
-    ];
+    ]; */
 
     let uiElement: HTMLElement = document.querySelector("[type=interface]");
     dataForSave = ƒS.Progress.setData(dataForSave, uiElement);

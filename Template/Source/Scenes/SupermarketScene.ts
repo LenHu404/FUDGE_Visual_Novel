@@ -1,5 +1,5 @@
 namespace Template {
-  export async function TestScene02(): ƒS.SceneReturn {
+  export async function SupermarketScene(): ƒS.SceneReturn {
     console.log("First Test Scene");
 
     let dialogue = {
@@ -10,7 +10,12 @@ namespace Template {
 
 
     ƒS.Speech.hide();
-    await ƒS.Location.show(locations.nightCity);
+    ƒS.Sound.fade(sound.supermarketTrolleys, 0.2, 1, true);
+    ƒS.Sound.play(sound.payingSound, 0.2, true);
+    ƒS.Sound.fade(sound.smallCrowd, 0.2, 1, true);    
+
+
+    await ƒS.Location.show(locations.supermarketInside);
     await ƒS.update(transitions.wet.duration, transitions.wet.alpha, transitions.wet.edge);
     await ƒS.Character.show(characters.Eduard, characters.Eduard.pose.normal, ƒS.positionPercent(20, 100));
     await ƒS.Character.show(characters.Aisaka, characters.Aisaka.pose.happy, ƒS.positionPercent(70, 110));
@@ -53,7 +58,8 @@ namespace Template {
         //await ƒS.Character.hide(characters.Eduard);
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Aisaka, "Alright i'll be right back with something sweet for you!");
-        await ƒS.Character.animate(characters.Aisaka, characters.Aisaka.pose.angry, ghostAnimation());
+        await ƒS.Character.hide(characters.Aisaka);
+        await ƒS.Character.animate(characters.Aisaka, characters.Aisaka.pose.happy, ghostAnimation());
         break;
     }
 
