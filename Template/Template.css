@@ -13,10 +13,15 @@ html, body {
 }
 
 scene {
-  width: 100vw;
-  height: 100vh;
+  width: 1280px;
+  height: 720px;
   display: inline-block;
   position: absolute;
+}
+
+canvas {
+  min-width: 100%;
+  height: 100%;
 }
 
 dialog[type=splash] {
@@ -46,38 +51,39 @@ dialog[type=splash]>p#vstitle {
   background-color: rgba(157, 157, 157,0.7);
 }
 
-canvas {
-  width: 100vw;
-  height: 100vh;
-}
 
 /***** SPEECH, CONTENT, NAMES *****/
 speech {
   position: absolute;
-  bottom: 0px;
-  left: 0px;
-  color: beige;
-  background-color: rgba(67, 29, 100, 0.9);
-  width: 100%;
-  height: 13%;
+  display: block;
+  padding: 20px;
+  margin: 2vw;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.955);
+  height: 15%;
+  border: solid rgb(199, 199, 199);
+  border-radius: 10px;
 }
 
 speech content {
-  color: rgb(209, 197, 242);
-  font-size: 2.5vmin;
+  color: rgb(208, 201, 211);
+  font-size: 1.7vmin;
   position: absolute;
-  left: 10px;
+  left: 20px;
+  font-family: Lucida Sans, Helvetica, Arial, sans-serif
 }
 
-name {
+speech name {
   font-size: 2vmin;
+  font-family: 'DePixel', sans-serif;
   display: block;
-  color: rgb(157, 157, 157);
-  margin: 10px;
+  color: rgb(164, 119, 190);
   margin-bottom: 10px;
 }
 
-dialog.gameMenuCSSClass {
+dialog.gameMenu {
   
   height: 35px;
   border: solid rgb(199, 199, 199);
@@ -88,49 +94,54 @@ dialog.gameMenuCSSClass {
   padding: 20px;
   background-color: rgba(53, 10, 94, 0.866);
 }
-dialog.gameMenuCSSClass> button {
+dialog.gameMenu> button {
   margin: 5px;
   background-color: rgba(149, 96, 200, 0.508);
   color: azure;
   padding-top: 5px;
   padding-right: 15px;
   padding-left: 15px;
-  font-size: large;
+  font-family: Lucida Sans, Helvetica, Arial, sans-serif;
   border: solid rgb(199, 199, 199);
   border-radius: 10px;
 }
-dialog.gameMenuCSSClass> button:hover {
+dialog.gameMenu> button:hover {
   background-color: rgba(212, 190, 233, 0.508);
   color: rgb(122, 39, 190);
 }
 
-dialog.choicesCSSClass {
-  
-  border: solid rgb(199, 199, 199);
-  border-radius: 10px;
+dialog.choices {
+  background-color: rgba(33, 5, 33, 0.73);
+  border: none;
+  width: 270px;
   text-align: center;
-  list-style-type: none;
-  margin-bottom: 10px;
-  padding: 20px;
-  background-color: rgba(49, 9, 88, 0.759);
-  position:absolute;
-  top: 100px;
-  left: 0%;
+  padding: 30px;
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+
 }
-dialog.choicesCSSClass> button {
+dialog.choices> button {
   margin: 5px;
   background-color: rgba(149, 96, 200, 0.508);
   color: azure;
   padding-top: 5px;
   padding-right: 15px;
   padding-left: 15px;
-  font-size: large;
+  font-family: Lucida Sans, Helvetica, Arial, sans-serif;
   border: solid rgb(199, 199, 199);
   border-radius: 10px;
 }
-dialog.choicesCSSClass> button:hover {
+dialog.choices> button:hover {
   background-color: rgba(212, 190, 233, 0.508);
   color: rgb(122, 39, 190);
+}
+
+input {
+  background-color: black;
+  color: aliceblue;
+  border: 2px solid;
+  border-color: aqua;
+  border-radius: 5px;
 }
 
 

@@ -4,6 +4,7 @@
     "sourceFiles": [
       "../Source/Main.ts",
       "../Source/Definitons/Dialog.ts",
+      "../Source/Scenes/01_startScene.ts",
       "../Source/Scenes/SupermarketScene.ts",
       "../Source/Scenes/TestScene.ts",
       "../Source/Scenes/TestScene02.ts",
@@ -19,7 +20,7 @@
         },
         {
           "pos": 15,
-          "end": 16230,
+          "end": 29481,
           "kind": "text"
         }
       ],
@@ -47,7 +48,7 @@
       "sections": [
         {
           "pos": 0,
-          "end": 2929,
+          "end": 5110,
           "kind": "text"
         }
       ]

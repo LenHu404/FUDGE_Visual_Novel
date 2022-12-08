@@ -12,7 +12,7 @@ namespace Template {
     ƒS.Speech.hide();
     ƒS.Sound.fade(sound.supermarketTrolleys, 0.2, 1, true);
     ƒS.Sound.play(sound.payingSound, 0.2, true);
-    ƒS.Sound.fade(sound.smallCrowd, 0.2, 1, true);    
+    ƒS.Sound.fade(sound.smallCrowd, 0.2, 1, true);
 
 
     await ƒS.Location.show(locations.supermarketInside);
@@ -21,6 +21,8 @@ namespace Template {
     await ƒS.Character.show(characters.Aisaka, characters.Aisaka.pose.happy, ƒS.positionPercent(70, 110));
     await ƒS.update(1);
     await ƒS.Speech.tell(characters.Aisaka, "I'm hungry. Can I go into the store?");
+    dataForSave.nameProtagonist = await ƒS.Speech.getInput();
+    characters.protagonist.name = dataForSave.nameProtagonist;
     let dialogueElement = await ƒS.Menu.getInput(dialogue, "choicesCSSClass");
 
 
@@ -30,11 +32,12 @@ namespace Template {
       case dialogue.iSayYes:
         console.log("Friendly Brother");
         // continue path here
-        await ƒS.Speech.tell(characters.Eduard, "Make it quick.");
+        await ƒS.Speech.tell(characters.protagonist, "Make it quick.");
         //await ƒS.Character.hide(characters.Eduard);
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Aisaka, "Okay it wont take long!");
-        await ƒS.Character.animate(characters.Aisaka, characters.Aisaka.pose.angry, ghostAnimation());
+        await ƒS.Character.hide(characters.Aisaka);
+        await ƒS.Character.animate(characters.Aisaka, characters.Aisaka.pose.happy, ghostAnimation());
         break;
 
       case dialogue.iSayNo:

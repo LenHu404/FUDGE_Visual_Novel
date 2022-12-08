@@ -47,6 +47,7 @@ namespace Template {
   export let sound = {
     // themes
     dystopia: "../Audio/Dystopian.ogg",
+    atmo1: "../Audio/atmo1.wav",
 
     //background
     supermarketTrolleys: "../Audio/Supermarket_with_Trolleys.mp3",
@@ -70,7 +71,27 @@ namespace Template {
     supermarketInside: {
       name: "Supermarkt",
       background: "Images/Backgrounds/supermarketInside.jpg"
+    },
+    gif: {
+      name: "gifs",
+      background: "Images/Backgrounds/starry.gif"
+    },
+    eldenRing01: {
+      name: "eldenRing01",
+      background: "Images/Backgrounds/eldenRing01.jpg"
+    },
+    eldenRing02: {
+      name: "eldenRing02",
+      background: "Images/Backgrounds/eldenRing02.png"
+    },
+    eldenRing_dorf_eingang: {
+      name: "eldenRing_dorf_eingang",
+      background: "Images/Backgrounds/eldenRing_Dorf_eingang.jpg"
     }
+  };
+
+  export let dataForSave = {
+    nameProtagonist: "....."
   };
 
   export let characters = {
@@ -78,7 +99,14 @@ namespace Template {
       name: ""
     },
     protagonist: {
-      name: ""
+      name: ".....",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/Prot_normal.png", // Pfad des Bildes
+        behind: "Images/Characters/Prot_behind.png",
+        horse_normal: "Images/Characters/Prothorse_normal.png",
+        horse_behind: "Images/Characters/Prothorse_behind.png"
+      }
     },
     Eduard: {
       name: "Eduard",
@@ -97,12 +125,82 @@ namespace Template {
         happy: "Images/Characters/aisaka_happy.png",
         upset: "Images/Characters/aisaka_upset.png"
       }
+    },
+    char1: {
+      name: "Sir Eduard",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/char3.png", // Pfad des Bildes
+        happy: "",
+        upset: ""
+      }
+    },
+    char2: {
+      name: "",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/char2.png", // Pfad des Bildes
+        happy: "",
+        upset: ""
+      }
     }
   };
 
-  export let dataForSave = {
-    nameProtagonist: ""
+  // **** ITEMS ****
+  // items is declared here as well as initialized
+  export let items = {
+    blobRED: {
+      name: "Blob Red",
+      description: "A reddish something",
+      image: "Images/Items/blobRED.png",
+      static: true
+    },
+    blobBU: {
+      name: "Blob Blue",
+      description: "A blueish something",
+      image: "Images/Items/blobBU.png"
+    },
+    blobDKBU: {
+      name: "Blob DK Blue",
+      description: "A dark blueish something",
+      image: "Images/Items/blobDKBU.png"
+    },
+    blobGN: {
+      name: "Blob Green",
+      description: "A greenish something",
+      image: "Images/Items/blobGN.png"
+    },
+    blobPK: {
+      name: "Blob Pink",
+      description: "A pinkish something",
+      image: "Images/Items/blobPK.png"
+    },
+    blobYL: {
+      name: "Blob Yellow",
+      description: "A yellowish something",
+      image: "Images/Items/blobYL.png"
+    },
+    blobOG: {
+      name: "Blob Orange",
+      description: "An orangeish something",
+      image: "Images/Items/blobOG.png"
+    }
   };
+
+  export function slideInAnimation(fromWhereX: number, fromWhereY: number, toWhereX: number, toWhereY: number): ƒS.AnimationDefinition {
+    return {
+      start: {
+        translation: ƒS.positionPercent(fromWhereX, fromWhereY),
+        color: ƒS.Color.CSS("white", 0),
+      },
+      end: {
+        translation: ƒS.positionPercent(toWhereX, toWhereY),
+        color: ƒS.Color.CSS("white", 1)
+      },
+      duration: 2,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
 
   export function ghostAnimation(): ƒS.AnimationDefinition {
     return {
@@ -153,6 +251,9 @@ namespace Template {
   // true entspricht Menü ist offen und false zu
   let menuIsOpen: boolean = true;
 
+  // true entspricht Inventory ist offen und false zu
+  let invIsOpen: boolean = false;
+
   async function buttonFunctionalities(_option: string): Promise<void> {
     console.log(_option);
     switch (_option) {
@@ -195,18 +296,41 @@ namespace Template {
           menuIsOpen = true;
         }
         break;
+      // Inventory shortcuts
+      case ƒ.KEYBOARD_CODE.I:
+        if (!invIsOpen) {
+          console.log("open inventory");
+          await ƒS.Inventory.open();
+          invIsOpen = true;
+        }
+        else {
+          console.log("close inventory");
+          await ƒS.Inventory.open();
+          ƒS.Inventory.close();
+          invIsOpen = false;
+        }
+        break;
+      case ƒ.KEYBOARD_CODE.ESC:
+        console.log("close inventory");
+        await ƒS.Inventory.open();
+        ƒS.Inventory.close();
+        break;
     }
   }
 
 
   window.addEventListener("load", start);
   function start(_event: Event): void {
-    gameMenu = ƒS.Menu.create(inGameMenuButtons, buttonFunctionalities, "gameMenuCSSClass");
+    gameMenu = ƒS.Menu.create(inGameMenuButtons, buttonFunctionalities, "gameMenu");
     buttonFunctionalities("Close");
     let scenes: ƒS.Scenes = [
+      { scene: startScene, name: "startScene" }
+
+    ];
+    /* let scenes: ƒS.Scenes = [
       { scene: SupermarketScene, name: "SupermarketScene" }
       
-    ];
+    ]; */
     /* let scenes: ƒS.Scenes = [
       { scene: TestScene, name: "Test Scene" },
       { scene: TestScene02, name: "Test Scene 02" }
